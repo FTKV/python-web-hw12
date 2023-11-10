@@ -6,6 +6,8 @@ import aiohttp
 import faker
 
 
+ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNjk5NTgxMjE3LCJleHAiOjE2OTk1ODIxMTcsInNjb3BlIjoiYWNjZXNzX3Rva2VuIn0.BjIYQMesawAhSZ1HpQ_oDDSjgLYKSLrk0n1zxWmGTfc"
+
 NUMBER_CONTACTS = 1000
 
 
@@ -27,7 +29,7 @@ async def get_fake_contacts():
 async def send_data_to_api() -> None:
     headers = {
         "content-type": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yQGFwaS5jb20iLCJpYXQiOjE2OTk1ODAyNjMsImV4cCI6MTY5OTU4MTE2Mywic2NvcGUiOiJhY2Nlc3NfdG9rZW4ifQ.ywYta7MR8kiGcO9XaCZBtjCjTlP5Ohzc0ynSJmepleg",
+        "Authorization": f"Bearer {ACCESS_TOKEN}",
     }
     session = aiohttp.ClientSession()
     async for first_name, last_name, email, phone, birthday, address in get_fake_contacts():
