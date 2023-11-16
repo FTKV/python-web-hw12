@@ -66,8 +66,8 @@ class Auth:
             payload = jwt.decode(
                 refresh_token, self.SECRET_KEY, algorithms=[self.ALGORITHM]
             )
-            if payload["scope"] == "refresh_token":
-                email = payload["sub"]
+            if payload.get("scope") == "refresh_token":
+                email = payload.get("sub")
                 if email is None:
                     raise credentials_exception
                 return email
@@ -92,8 +92,8 @@ class Auth:
         try:
             # Decode JWT
             payload = jwt.decode(token, self.SECRET_KEY, algorithms=[self.ALGORITHM])
-            if payload["scope"] == "access_token":
-                email = payload["sub"]
+            if payload.get("scope") == "access_token":
+                email = payload.get("sub")
                 if email is None:
                     raise credentials_exception
             else:

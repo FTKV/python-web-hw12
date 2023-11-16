@@ -73,7 +73,7 @@ async def read_contacts_with_birthdays_in_n_days(
     for delta_days in range(n):
         result = result + tmp[delta_days]
 
-    return result[offset:limit]
+    return result[offset : offset + limit]
 
 
 async def read_contact(

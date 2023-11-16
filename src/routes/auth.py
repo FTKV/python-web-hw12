@@ -62,6 +62,10 @@ async def refresh_token(
     token = credentials.credentials
     email = await auth_service.decode_refresh_token(token)
     user = await repository_users.get_user_by_email(email, session)
+    if user is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email"
+        )
     if user.refresh_token != token:
         await repository_users.update_token(user, None, session)
         raise HTTPException(
